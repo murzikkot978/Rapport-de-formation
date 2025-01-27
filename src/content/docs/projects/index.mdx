@@ -1,17 +1,71 @@
 ---
-title: Best projects
+title: Rust todo list
 ---
 
 import { Badge } from '@astrojs/starlight/components';
 
-## Rust todo list
-
-<Badge text="Rust" variant="note" />
+<a href="/Rapport-de-formation/technologies/rust">
+  <Badge text="Rust" variant="note" />
+</a>
+<a href="/Rapport-de-formation/technologies/serde">
 <Badge text="Serde" variant="caution" />
+</a>
+<a href="/Rapport-de-formation/technologies/clap">
 <Badge text="Clap" variant="caution" />
+</a>
+<a href="/Rapport-de-formation/technologies/chrono">
+<Badge text="Chrono" variant="caution" />
+</a>
 
-Realized during the first semester, ...
+Ce projet de premier plan a été réalisé au cours du premier trimestre.
 
-![Todlist capture](../../../assets/rust-todo-list.png)
+Au cours de cette mission, j'ai appris à utiliser la base du langage de programmation Rust.
 
-## Another project
+Trois bibliothèques sont utilisées dans ce projet : Serde, Clap et Chrono.
+
+Ce programme vous permet d'enregistrer vos tâches dans un fichier sous forme de JSON. Pour ce faire, vous pouvez utiliser le terminal.
+
+Vous pouvez utiliser l'humidité du terminal pour interagir avec les tâches. Par exemple, pour changer le statut d'une tâche et pour modifier l'échéance de chaque tâche.
+
+**La bibliothèque _Clap_ a été utilisée pour les drapeaux.**
+
+**La bibliothèque _Serde_ a été utilisée pour l'interaction avec _JSON_.**
+
+**J'ai utilisé la bibliothèque _Chrono_ pour interagir avec le temps.**
+
+## Example
+
+```rs
+fn main() {
+    // Open and read the todo file or create a new
+    let mut todos: Vec<Todo> = match read_to_string("todo.json") {
+        Err(_) => Vec::new(),
+        Ok(todos) => serde_json::from_str(&todos).expect("can't open file todo.json"),
+    };
+
+    // Parse command-line arguments into the Flag struct
+    let flag: Flag = Flag::parse();
+    if flag.delete {
+        todos.remove(flag.id - 1);
+        println!("Tâche supprimée.");
+
+    // Set the status of the todo to true
+    } else if flag.done {
+        todos[flag.id - 1].status = true;
+
+    // Set the status of the todo to false
+    } else if flag.undone {
+        todos[flag.id - 1].status = false;
+
+    //Parse the date and set it as the deadline for the todo
+    } else if let Some(date_string) = flag.due {
+        match NaiveDate::parse_from_str(&date_string, "%Y-%m-%d") {
+            Ok(date) => {
+                todos[flag.id - 1].deadline = Some(date);
+            }
+            Err(_) => {
+                println!("Invalid date format! Please use YYYY-MM-DD.");
+            }
+        }
+
+```

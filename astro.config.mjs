@@ -30,10 +30,6 @@ export default defineConfig({
             {
                 label: 'Technologies',
                 autogenerate: {directory: 'technologies'},
-            },
-            {
-                label: 'Tools',
-                autogenerate: {directory: 'tools'},
             }
         ],
     })],
