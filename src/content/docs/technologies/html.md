@@ -2,6 +2,8 @@
 title: HTML
 ---
 
+![image](/Rapport-de-formation/html-logo.png)
+
 HTML, qui signifie en anglais HyperText Markup Language, est un langage informatique pour rédiger des pages web. Grâce à
 lui il est possible de rédiger de l’hypertexte, de mettre en forme le contenu, de faire des formulaires de saisie, de
 rajouter dans la page des images, vidéos ou des graphismes ou encore de faire la sémantique de la page web. Ce langage

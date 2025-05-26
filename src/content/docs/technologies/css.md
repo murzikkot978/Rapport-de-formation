@@ -2,6 +2,8 @@
 title: CSS
 ---
 
+![image](/Rapport-de-formation/css-logo.svg)
+
 CSS (Cascading Style Sheets) permet de créer des pages web à l'apparence soignée. Cet article vous propose de lever le
 voile en expliquant ce qu'est CSS ; un exemple simple en présentera la syntaxe, puis quelques termes clés du langage
 seront introduits.

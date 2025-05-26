@@ -2,6 +2,8 @@
 title: Typescript
 ---
 
+![typescript logo](/Rapport-de-formation/tslogo.png)
+
 TypeScript ajoute une syntaxe supplémentaire à [JavaScript](/Rapport-de-formation/technologies/javascript) pour favoriser une intégration plus poussée avec votre
 éditeur. Détectez les erreurs au plus tôt dans votre éditeur.
 

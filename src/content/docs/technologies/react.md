@@ -2,6 +2,8 @@
 title: React
 ---
 
+![react logo](/Rapport-de-formation/react-logo.png)
+
 React est une bibliothèque JavaScript populaire développée par Facebook pour construire des interfaces utilisateur interactives et dynamiques. Elle est largement utilisée pour le développement d’applications web modernes, notamment les applications à page unique (SPA).
 
 React facilite la création de composants réutilisables, ce qui permet de structurer le code de manière modulaire et efficace. Grâce à sa grande communauté et à son écosystème riche, React est devenu un choix incontournable pour de nombreux développeurs web.

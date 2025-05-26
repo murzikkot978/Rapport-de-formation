@@ -2,6 +2,8 @@
 title: Javascript
 ---
 
+![javascript logo](/Rapport-de-formation/jslogo.jpg)
+
 JavaScript est l’un des langages de programmation les plus populaires au monde depuis plus de vingt ans. C’est aussi
 l’une des trois langages principaux pour les développeurs web.
 
