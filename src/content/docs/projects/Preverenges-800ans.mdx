@@ -38,7 +38,7 @@ import { Badge } from '@astrojs/starlight/components';
   </a>
 </div>
 
-##### Durée réalisation : 4 semaine
+##### Période de réalisation : septembre 2025 – octobre 2026 (projet suivi en parallèle d'autres mandats)
 ##### Lieu de réalisation : Lausanne Trivialmass
 ##### Conpétences opérationnelles acquises :
 ###### E.g. : a3, a4, a5, a6, a7
@@ -47,25 +47,68 @@ import { Badge } from '@astrojs/starlight/components';
 ###### E.g. : g1, g2, g4, g5, g6
 ###### E.g. : h1, h2, h3, h4
 
-### Création et gestion de site web
+### Contexte
 
-Dans le cadre de la formation, 
-j’ai travaillé sur la **création et la configuration d’un site web** développé sous WordPress. 
-J’ai utilisé le **thème personnalisé** et l’éditeur visuel **Divi Builder** afin de concevoir des pages modernes et adaptables aux besoins du client.
+En 2026, la commune de **Préverenges fête ses 800 ans**. Le site [preverenges800.ch](https://preverenges800.ch/) présente
+le programme de l'année (activités, fêtes, spectacles), permet de **s'inscrire aux événements** et de **commander des billets / produits** en ligne.
+
+Le site est un **thème WordPress sur mesure** (TrivialForge, base de l'agence) développé en équipe avec un autre développeur de Trivialmass.
+J'ai suivi le projet du début de l'archive des activités jusqu'aux derniers ajustements, avec une soixantaine de commits sur GitHub.
 
 ### Travaux réalisés
 
-* **Configuration du thème WordPress** : installation, personnalisation et ajustement du thème selon la charte graphique.
-* **Utilisation de Divi Builder** : apprentissage et mise en pratique de la création de sections, de modules et de mises en page dynamiques.
-* **Utilisation du plugin ACF (Advanced Custom Fields)** : ajout de champs personnalisés pour enrichir les contenus et faciliter la gestion depuis le back-office.
-* **Création de blocs personnalisés (Custom Blocks)** : développement de blocs réutilisables pour optimiser la mise en page et garantir la cohérence du site.
-* **Création d’archives pour les événements** : mise en place d’un système d’affichage dynamique des événements à l’aide de Custom Post Types (CPT) et de templates PHP.
-* **Développement en PHP** : gestion de la logique du site (boucles, templates, appels de champs ACF, etc.) pour rendre le contenu dynamique et automatisé.
-* **Migration du site** : transfert complet du site vers l’hébergement Infomaniak, avec vérification du bon fonctionnement et configuration du domaine.
+#### 1. Programme des activités (Custom Post Type « Activité »)
 
-### Compétences acquisses
+* Création de l'**archive des activités** et d'un **bloc Gutenberg « Activités »** réutilisable sur les pages.
+* Gestion de plusieurs types de dates : **dates multiples** (répéteur ACF), **période** (date de début / fin) et événements **« Toute l'année »**.
+* Écriture d'une fonction PHP `get_activite_dates()` qui centralise le calcul des dates et renvoie la **prochaine date à venir** pour trier les événements.
+* **Tri des événements par date la plus proche**, regroupement par date et gestion des événements qui se chevauchent.
+* Possibilité de **masquer une activité** de l'archive (meta query) sans la supprimer.
+* Page de détail d'une activité (`single-activite.php`) : bannière personnalisée, dates, contenu, champ « Sous-titrés »…
 
-* Maîtrise de **WordPress** et du **Divi Builder** pour la création de sites professionnels.
-* Connaissance de **l’intégration PHP** dans un environnement WordPress (thèmes, templates, CPT, ACF).
-* Gestion de la **migration et configuration d’un site web** sur un hébergement Infomaniak.
-* Capacité à **structurer un site réutilisable et évolutif** grâce aux blocs personnalisés et à la gestion dynamique du contenu.
+#### 2. Blocs Gutenberg personnalisés (ACF Blocks)
+
+* **Bloc image avec description** (titre, sous-titre, bouton avec libellé et URL).
+* **Bloc logos des sponsors** et **bandeau de la page**.
+* **Bloc bannière aléatoire** : affiche une image et un lien choisis au hasard parmi une liste.
+* Amélioration du **bloc Résultats de la tombola** : import d'un fichier **XLSX** (avec liens hypertextes), normalisation de la recherche pour que le visiteur retrouve son numéro de billet.
+* Versionnement des champs ACF dans le dossier `acf-json`.
+
+#### 3. Formulaires d'inscription avec Gravity Forms
+
+C'est la partie la plus technique du projet. Plusieurs événements demandaient une inscription avec **places limitées** :
+
+* **Fête populaire** : choix du nombre d'adultes / enfants et des menus (**classique** ou **végétarien**).
+  Le script JavaScript `GF_fete_populaire.js` sauvegarde les choix dans le `localStorage`, construit un **récapitulatif** et calcule les totaux.
+* **Limite de réservations côté serveur** (PHP) : comptage des inscriptions existantes avec `GFAPI::get_entries()`,
+  validation du formulaire (`gform_validation`) et fermeture automatique lorsque la capacité est atteinte (max. 500 personnes).
+* **Menus restants en temps réel** : endpoint **AJAX** WordPress (`wp_ajax_…`) protégé par un **nonce**, qui renvoie le nombre de menus classiques et végétariens encore disponibles.
+* Composants similaires pour le **Lunch des entreprises** et la **Fête des enfants** (limite de places, validation des participants et des menus).
+* Mise en forme complète des formulaires en SCSS (champs, radios, cases à cocher, messages d'erreur).
+
+#### 4. Boutique WooCommerce
+
+* Mise en page des **produits** et de la **boutique** (styles, badges produit).
+* Ajout d'un **champ personnalisé sous le titre du produit**.
+* Adaptation des **e-mails de commande** (lieu de l'événement détaillé).
+
+#### 5. Intégration et design
+
+* Intégration de la charte graphique (couleurs, typographie h2/h3/h5, en-tête, pied de page) avec **Tailwind CSS** et **Sass**.
+* **Défilement fluide** vers les ancres et responsive design (mobile / tablette / desktop).
+* **Migration du site** vers l'hébergement **Infomaniak** et configuration du domaine.
+
+### Organisation du travail
+
+* Travail en équipe sur un dépôt **Git / GitHub** commun (branches, merges, résolution de conflits).
+* Messages de commit au format **Conventional Commits** (`feat:`, `fix:`, `refactor:`).
+* Développement en local avec **Local (WP)**, puis déploiement sur le serveur.
+* Échanges avec le client pour adapter le site au fur et à mesure de l'année (nouvelles activités, nouveaux formulaires, changements de capacité).
+
+### Compétences acquises
+
+* Maîtrise de **WordPress** pour un site complexe : CPT, templates, ACF, blocs Gutenberg sur mesure.
+* Développement **PHP** côté serveur : hooks et filtres WordPress, API Gravity Forms, requêtes `WP_Query` et meta queries.
+* **JavaScript** côté client : AJAX, `localStorage`, logique de formulaires dynamiques.
+* Sécurité de base : vérification de **nonce**, validation côté serveur et pas seulement côté client.
+* Maintenance d'un site **en production** utilisé par le public pendant toute une année.

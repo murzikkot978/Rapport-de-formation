@@ -1,5 +1,5 @@
 ---
-title: Vaudoiseriess
+title: Vaudoiseries
 ---
 
 import { Badge } from '@astrojs/starlight/components';
@@ -51,7 +51,7 @@ import { Badge } from '@astrojs/starlight/components';
     </div>
 </div>
 
-##### Durée réalisation : 3 semaine
+##### Période de réalisation : octobre 2025 (mise en place) puis juin – septembre 2026 (développement principal)
 ##### Lieu de réalisation : Lausanne Trivialmass
 ##### Conpétences opérationnelles acquises :
 ###### E.g. : a3, a4, a6, a7
@@ -59,35 +59,65 @@ import { Badge } from '@astrojs/starlight/components';
 ###### E.g. : g2, g4, g5, g6
 ###### E.g. : h4
 
-### Création et gestion de site web
+### Contexte
 
-Dans le cadre de la formation, 
-j’ai travaillé sur la **création et la configuration d’un site web** développé sous WordPress. 
-J’ai utilisé le **thème personnalisé** afin de concevoir des pages modernes et adaptables aux besoins du client.
+**Vaudoiseries** est un événement qui met en avant les **créateurs**, **enseignes** et **restaurants** du canton de Vaud.
+Le site [vaudoiseries.ch](https://vaudoiseries.ch/) présente les participants, leurs **collaborations** et les **activités / ateliers** proposés,
+et offre aux participants un **espace personnel** pour remplir eux-mêmes leurs informations.
 
-### Description du projet réalisé
+J'ai réalisé la grande majorité du thème WordPress (environ 90 commits sur GitHub), avec l'aide ponctuelle d'un autre développeur de Trivialmass.
 
-J'ai dévéloppé un site intégrant l'ensemble des donctionnalités décrites précédemment, notamment:
+### Travaux réalisés
 
-* Création de formulaires avancés avancés avec Gravity Forms
-* Animation interactives avec GSAP
-* Carte personnalisée via Advanced Custom Fields (ACF Map)
+#### 1. Mise en place du thème (octobre 2025)
 
-Le site a été conçu comme une plateforme destinée aux personnes souhaitant participer à un événement.
+* Installation du thème TrivialForge, typographie **GT-Planar**, couleurs de la charte.
+* **Menu mobile**, en-tête avec logo SVG, pied de page.
+* Premier **bloc carte (ACF Map / Google Maps)** avec marqueurs dynamiques et icône SVG personnalisée.
 
-### Objectif du site
+#### 2. Structure du contenu (Custom Post Types + ACF)
 
-* De présenter l'événement
-* De permettre l'inscription des participants
-* D'afficher les information pratiques
-* D'améliorer l'expérience utilisateur grâce aux animations et à une interface dynamique
+* Création des types de contenu **Participants**, **Collaborations**, **Activités** et **Commandes**, avec leurs champs ACF et une **taxonomie** pour classer les participants.
+* Templates d'archive et de page de détail pour chaque type (`archive-participant.php`, `single-collaboration.php`, …).
+* **Relations bidirectionnelles** entre participants, collaborations et activités : quand on lie une collaboration à un participant, le lien inverse est créé automatiquement,
+  et il est nettoyé quand un contenu est mis à la corbeille ou supprimé.
+* Champs adresse, réseaux sociaux (avec icônes), co-auteurs, éditeur WYSIWYG pour les textes.
 
-### Évolution du projet
+#### 3. Blocs Gutenberg et interface
 
-Le site a été pensé comme un projet évolutif.
+* **Bannière** avec rotation automatique des images et transitions.
+* **Bloc Activités** avec onglets par date, **bloc Enseignes / Créateurs**, **bloc Partenaires**, **bloc Image + description**.
+* **Carte interactive** avec **filtres** (participants, collaborations, activités).
+* **Carrousel photos** (Swiper) sur les pages de détail.
+* **Animation du logo** au défilement avec **GSAP**.
+* Archive des participants avec **filtres**, onglets (dont « Restaurants ») et bouton de réinitialisation.
+* Tableau des activités **responsive** (lignes empilées sur mobile) et page **« Ateliers »**.
 
-Il sera progressivement enrichi au fur et à mesure du développement de l'événement, avec l'ajout de nouvelles fonctionnalités, de contenus supplémentaires et d'améliorations techniques.
+#### 4. Portail participants (espace « Mon compte »)
 
-* Une meilleure adaptabilité
-* Une évolution continue du design et des donctionnalités
-* Une mise à jour simple des informations
+* Création d'un **rôle utilisateur « Participant »** et redirection après connexion vers son espace.
+* **Formulaires front-end ACF** pour que chaque participant crée et modifie son profil, ses collaborations et ses activités sans accéder à l'administration.
+* **Restrictions d'accès** : blocage du back-office, accès uniquement à ses propres contenus, médiathèque limitée à ses propres fichiers.
+* **Verrouillage en deux phases** des collaborations, puis adaptation des règles quand le client a souhaité permettre la modification sans limite.
+* **Limite du nombre d'activités** qu'un participant peut soumettre.
+* **Commande de matériel de communication** (CPT « Commande ») selon le type de participant.
+
+#### 5. Notifications et e-mails
+
+* **E-mail de bienvenue personnalisé** pour les nouveaux participants (logo, bannière gérée dans ACF).
+* **Notification à l'administrateur** à chaque soumission front-end (participant, collaboration, activité) avec adresse e-mail configurable.
+* Intégration de **Google Tag Manager**.
+
+### Organisation du travail
+
+* Travail sur **Git / GitHub**, déploiement du thème via script `rsync` / SSH.
+* Champs ACF versionnés en JSON (`acf-json`) pour pouvoir les partager entre les environnements.
+* Allers-retours réguliers avec le client : les règles métier (délais, verrouillages, limites) ont changé plusieurs fois et le code a dû être adapté.
+
+### Compétences acquises
+
+* Conception d'un **modèle de données** WordPress avec plusieurs CPT liés entre eux.
+* Gestion des **rôles et permissions** utilisateurs dans WordPress.
+* Développement de **formulaires front-end** et de leur validation côté serveur (hooks `acf/save_post`).
+* JavaScript pour l'interface : onglets, filtres de carte, carrousel, animations GSAP.
+* Capacité à **faire évoluer un projet** quand les besoins du client changent.

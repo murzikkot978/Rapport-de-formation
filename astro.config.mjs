@@ -28,6 +28,10 @@ export default defineConfig({
                 autogenerate: {directory: 'projects'}
             },
             {
+                label: 'Rencontres clients',
+                autogenerate: {directory: 'rencontres-clients'}
+            },
+            {
                 label: 'Technologies',
                 autogenerate: {directory: 'technologies'},
             }
